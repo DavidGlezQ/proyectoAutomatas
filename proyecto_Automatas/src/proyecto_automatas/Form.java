@@ -129,7 +129,7 @@ public class Form extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form().setVisible(true);
+                new Form().setVisible(true); 
             }
         });
     }
