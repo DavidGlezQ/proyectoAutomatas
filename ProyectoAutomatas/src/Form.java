@@ -149,21 +149,34 @@ public class Form extends JFrame {
 
             //Declaracion de StringTokenizer y ArrayList
 
-            List<String> tokens = new ArrayList<>();
+            List<String> tokensList = new ArrayList<>();
             StringTokenizer tokenizer = new StringTokenizer(texto.toString());
             while (tokenizer.hasMoreElements()) {
-                tokens.add(tokenizer.nextToken());
+                tokensList.add(tokenizer.nextToken());
             }
 
             // StrCharAt.java
+            for (String s : tokensList) {
+                for (int i = 0; i < s.length(); i++) {
+                    //System.out.println("Char " + i + " is " + s.charAt(i));
+                    switch (s.charAt(i)) {
+                        //Evaluar la primera palabra y en base a eso mandar al automata correspondiente
+                        case '-': {
+                            System.out.println("puede ser operador aritmetico o numero negativo");
+                        }
+                        case '&': {
+                            System.out.println("puede ser operador logico");
+                        }
+                        default: {
+                            System.out.println("default");
+                        }
+                    }
+                }
+            }
 
-            for (int i=0; i < tokens.get(0).length(  ); i++)
-                System.out.println("Char " + i + " is " + tokens.get(0).charAt(i));
-
-
-            System.out.println("Tamaño del texto: " + tokens.size());
-            System.out.println("Texto: " + tokens.get(0));
-            System.out.println("Texto: " + tokens.get(1));
+            /*System.out.println("Tamaño del texto: " + tokensList.size());
+            System.out.println("Texto: " + tokensList.get(0));
+            System.out.println("Texto: " + tokensList.get(1));*/
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
