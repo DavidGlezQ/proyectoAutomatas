@@ -1,8 +1,11 @@
+import org.w3c.dom.Text;
+
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -137,22 +140,31 @@ public class Form extends JFrame {
         File archivo = fc.getSelectedFile();
 
         try{
+            //Leer archivo
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
             StringBuilder texto = new StringBuilder();
             String linea = "";
             while ((linea = br.readLine()) != null) texto.append(linea).append("\n");
 
-            //StringTokenizer declaration
-            StringTokenizer tokens = new StringTokenizer(texto.toString());
-            ArrayList<String> arrayList = new ArrayList<>();
+            //Declaracion de StringTokenizer y ArrayList
 
-            while(tokens.hasMoreTokens()){
-                System.out.println(tokens.nextToken());
-                arrayList.add(tokens.toString());
+            List<String> tokens = new ArrayList<>();
+            StringTokenizer tokenizer = new StringTokenizer(texto.toString());
+            while (tokenizer.hasMoreElements()) {
+                tokens.add(tokenizer.nextToken());
             }
-            System.out.println(arrayList.size());
-            jTextArea1.setText("Tamaño del texto" + texto);
+
+            // StrCharAt.java
+
+            for (int i=0; i < tokens.get(0).length(  ); i++)
+                System.out.println("Char " + i + " is " + tokens.get(0).charAt(i));
+
+
+            System.out.println("Tamaño del texto: " + tokens.size());
+            System.out.println("Texto: " + tokens.get(0));
+            System.out.println("Texto: " + tokens.get(1));
+            jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
         }catch(Exception ex){
@@ -168,6 +180,15 @@ public class Form extends JFrame {
 
             }
         });
+    }
+
+    public List<String> getTokens(String str) {
+        List<String> tokens = new ArrayList<>();
+        StringTokenizer tokenizer = new StringTokenizer(str);
+        while (tokenizer.hasMoreElements()) {
+            tokens.add(tokenizer.nextToken());
+        }
+        return tokens;
     }
 
     private javax.swing.JButton jButton1;
