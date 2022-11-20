@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * @author David Alejando Gonzalez Quezada
@@ -137,41 +139,29 @@ public class Form extends JFrame {
         try{
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
-            String texto = "";
+            StringBuilder texto = new StringBuilder();
             String linea = "";
-            while ((linea = br.readLine()) != null) texto+=linea+"\n";
-            jTextArea1.setText(texto);
+            while ((linea = br.readLine()) != null) texto.append(linea).append("\n");
+
+            //StringTokenizer declaration
+            StringTokenizer tokens = new StringTokenizer(texto.toString());
+            ArrayList<String> arrayList = new ArrayList<>();
+
+            while(tokens.hasMoreTokens()){
+                System.out.println(tokens.nextToken());
+                arrayList.add(tokens.toString());
+            }
+            System.out.println(arrayList.size());
+            jTextArea1.setText("Tamaño del texto" + texto);
+
             JOptionPane.showMessageDialog(null, "Leido correctamente");
         }catch(Exception ex){
-
+            System.out.println(ex);
         }
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Form().setVisible(true);
