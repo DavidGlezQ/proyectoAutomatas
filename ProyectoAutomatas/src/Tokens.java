@@ -17,6 +17,11 @@ public class Tokens {
     * parentesis: termiando
     * llave: terminado*/
 
+    Boolean comment() {
+        boolean isValid = false;
+
+        return isValid;
+    }
     Boolean wholeNumber(String word) {
         /*validar el signo negativo
         * validar que sea un numero
