@@ -167,8 +167,11 @@ public class Form extends JFrame {
                 //Automata, parentesis: (, )
                 if (tokens.parenthesis(s)) parenthesisToken++;
 
-                //Automata, numero entero
-                if (tokens.wholeNumber(s)) wholeNumberToken++;
+                //Automata, numeros enteros
+                if (tokens.numberWholeValidation(s)) wholeNumberToken++;
+
+                //Automata, numeros decimales
+                if (tokens.numberDecimalValidation(s)) decimalNumberToken++;
 
                 //evaluar "-", numeros decimales y enteros
                     /*if (s.charAt(i) == '-') {
@@ -211,6 +214,7 @@ public class Form extends JFrame {
             tvLlave.setText("LLaves encontradas: " + bracketsToken);
             tvParentesis.setText("Parentesis encontrados: " + parenthesisToken);
             tvNumEnteros.setText("Numeros enteros econtrados: " + wholeNumberToken);
+            tvNumDecimales.setText("Numeros decimales econtrados: " + decimalNumberToken);
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");

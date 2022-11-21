@@ -11,7 +11,7 @@ public class Tokens {
     * operador aritmetico: terminado
     * operador logico: terminado
     * asignacion: terminado
-    * numero entero
+    * numeros enteros: terminado
     * numero decimal
     * comentario
     * parentesis: termiando
@@ -25,12 +25,13 @@ public class Tokens {
         boolean isValid = false;
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == '-') { //Validar si el numero es negativo
-                if (numberValidation(word.charAt(i))) {
+                if (numberWholeValidation(String.valueOf(word.charAt(i)))) {
                     if (Integer.parseInt(word) % 2 == 0) {
                         isValid = true;
                     }
                 }
-            } else if (numberValidation(word.charAt(i))) { //validar si en numero es positivo
+            }
+            if (numberWholeValidation(String.valueOf(word.charAt(i)))) { //validar si en numero es positivo
                 if (Integer.parseInt(word) % 2 == 0) {
                     isValid = true;
                 }
@@ -39,26 +40,42 @@ public class Tokens {
         return isValid;
     }
 
-    Boolean numberValidation(char character) {
+    Boolean numberWholeValidation(String word) {
         try {
-            Integer.parseInt(String.valueOf(character));
-            return true;
+            return (Integer.parseInt(word) % 2 == 0);
         } catch (NumberFormatException nfe){
             return false;
         }
-
-        /*return character == '0' || character == '1' || character == '2' || character == '3'
-                || character == '4' || character == '5' || character == '6'
-                || character == '7' || character == '8' || character == '9';*/
     }
 
-    Boolean decimalNumber(String word) {
+    Boolean numberDecimalValidation(String word) {
         /*validar el signo negativo
          * validar que sea un numero
          * despues del signo negativo validar sacando el residuo para saber si es o no entero
          * */
-        boolean isValid = false;
+        try {
+            return isDecimalNumber(word);
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
 
+    Boolean isDecimalNumber(String word) {
+        Character c;
+        boolean isValid = false;
+        int control = 0;
+        for (int i = 0; i < word.length(); i++) {
+            c = word.charAt(i);
+            if (!Character.isDigit(c)) {
+                if (c.equals('.') && control == 0) {
+                    control ++;
+                    isValid = true;
+                } else {
+                    isValid = false;
+                    break;
+                }
+            }
+        }
         return isValid;
     }
 
