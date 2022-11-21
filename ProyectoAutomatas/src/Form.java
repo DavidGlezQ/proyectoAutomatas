@@ -58,8 +58,6 @@ public class Form extends JFrame {
 
         tvOperadorLogico.setText("Operador logico");
 
-        tvOperadorAritmetico.setText("Operador aritmetico");
-
         tvAsignacion.setText("Asignacion");
 
         tvNumEnteros.setText("Numeros enteros");
@@ -137,11 +135,24 @@ public class Form extends JFrame {
 
         JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(null);
-        File archivo = fc.getSelectedFile();
+        File file = fc.getSelectedFile();
+        Tokens tokens = new Tokens();
+        int identifierToken = 0;
+        int relationalOperatorToken = 0;
+        int logicOperatorToken = 0;
+        int arithmeticOperatorToken = 0;
+        int assignmentToken = 0;
+        int wholeNumberToken = 0;
+        int decimalNumberToken = 0;
+        int commentToken = 0;
+        int parenthesisToken = 0;
+        int bracketsToken = 0;
+
+
 
         try{
             //Leer archivo
-            FileReader fr = new FileReader(archivo);
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             StringBuilder texto = new StringBuilder();
             String linea = "";
@@ -157,26 +168,47 @@ public class Form extends JFrame {
 
             // StrCharAt.java
             for (String s : tokensList) {
-                for (int i = 0; i < s.length(); i++) {
-                    //System.out.println("Char " + i + " is " + s.charAt(i));
-                    switch (s.charAt(i)) {
-                        //Evaluar la primera palabra y en base a eso mandar al automata correspondiente
-                        case '-': {
+                //System.out.println("Char " + i + " is " + s.charAt(i));
+
+                //automata operador aritemtico, evaluando +, * y %
+                if (tokens.arithmeticOperator(s)) arithmeticOperatorToken++;
+
+
+                //evaluar "-", numeros decimales y enteros
+                    /*if (s.charAt(i) == '-') {
+
+                        if (s.length() > 1) {
+                            //evaluar si es numero
+                            char c = s.charAt(i);
+                            System.out.println(c);
+                            if (c < '0' || c > '9') {
+
+                                if (s.charAt(i) % 2 == 0) {
+                                    System.out.println("es un numero entero");
+                                } else {
+                                    System.out.println("es un numero decimal");
+                                }
+                            }
+                        } else {
                             System.out.println("puede ser operador aritmetico o numero negativo");
                         }
-                        case '&': {
-                            System.out.println("puede ser operador logico");
-                        }
-                        default: {
-                            System.out.println("default");
-                        }
-                    }
-                }
+                    }*/
+
+                //automata numeros enteros y decimales
+                    /*if (s.charAt(i) == '0' || s.charAt(i) == '1' || s.charAt(i) == '2' || s.charAt(i) == '3'
+                            || s.charAt(i) == '4' || s.charAt(i) == '5' || s.charAt(i) == '6' || s.charAt(i) == '7'
+                            || s.charAt(i) == '8' || s.charAt(i) == '9') {
+                        System.out.println("puede ser operador aritmetico o numero negativo");
+
+
+                    }*/
+
             }
 
             /*System.out.println("Tamaño del texto: " + tokensList.size());
             System.out.println("Texto: " + tokensList.get(0));
             System.out.println("Texto: " + tokensList.get(1));*/
+            tvOperadorAritmetico.setText("Operadores aritmeticos encontrados: " + arithmeticOperatorToken);
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
