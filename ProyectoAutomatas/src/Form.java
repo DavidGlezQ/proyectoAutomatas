@@ -161,6 +161,15 @@ public class Form extends JFrame {
                 //Automata, operadores logicos, evaluando <, >, <=, >=, ==, !=
                 if (tokens.relationalOperator(s)) relationalOperatorToken++;
 
+                //Automata, llaves: {, }
+                if (tokens.brackets(s)) bracketsToken++;
+
+                //Automata, parentesis: (, )
+                if (tokens.parenthesis(s)) parenthesisToken++;
+
+                //Automata, numero entero
+                if (tokens.wholeNumber(s)) wholeNumberToken++;
+
                 //evaluar "-", numeros decimales y enteros
                     /*if (s.charAt(i) == '-') {
 
@@ -199,6 +208,9 @@ public class Form extends JFrame {
             tvAsignacion.setText("Operadores de asignacion encontrados: " + assignmentToken);
             tvOperadorLogico.setText("Operadores logicos encontrados: " + logicOperatorToken);
             tvOperadorRelacional.setText("Operadores relacionales encontrados: " + relationalOperatorToken);
+            tvLlave.setText("LLaves encontradas: " + bracketsToken);
+            tvParentesis.setText("Parentesis encontrados: " + parenthesisToken);
+            tvNumEnteros.setText("Numeros enteros econtrados: " + wholeNumberToken);
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
