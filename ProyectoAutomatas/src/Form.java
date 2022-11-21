@@ -158,6 +158,9 @@ public class Form extends JFrame {
                 //Automata, operadores logicos, evaluando &&, ||, !
                 if (tokens.logicOperator(s)) logicOperatorToken++;
 
+                //Automata, operadores logicos, evaluando <, >, <=, >=, ==, !=
+                if (tokens.relationalOperator(s)) relationalOperatorToken++;
+
                 //evaluar "-", numeros decimales y enteros
                     /*if (s.charAt(i) == '-') {
 
@@ -195,6 +198,7 @@ public class Form extends JFrame {
             tvOperadorAritmetico.setText("Operadores aritmeticos encontrados: " + arithmeticOperatorToken);
             tvAsignacion.setText("Operadores de asignacion encontrados: " + assignmentToken);
             tvOperadorLogico.setText("Operadores logicos encontrados: " + logicOperatorToken);
+            tvOperadorRelacional.setText("Operadores relacionales encontrados: " + relationalOperatorToken);
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");

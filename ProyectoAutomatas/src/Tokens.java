@@ -22,10 +22,23 @@ public class Tokens {
         return isValid;
     }
 
+    Boolean relationalOperator(String word) {
+        boolean isValid = false;
+        for (int i = 0; i < word.length(); i++) {
+            if (word.equals("<") || word.equals(">") || word.equals("<=") || word.equals(">=") || word.equals("==") || word.equals("!=")) {
+                System.out.println("Es un operador relacional");
+                isValid = true;
+                break;
+            }
+        }
+        return isValid;
+    }
+
     Boolean logicOperator(String word) {
         boolean isValid = false;
         for (int i = 0; i < word.length(); i++) {
             if (word.equals("&&") || word.equals("||") || word.equals("!")) {
+                System.out.println("Es un operador logico");
                 isValid = true;
                 break;
             }
