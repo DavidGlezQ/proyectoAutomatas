@@ -1,5 +1,3 @@
-import org.w3c.dom.Text;
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,24 +49,6 @@ public class Form extends JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setText("Tokens detectados:");
-
-        tvIdentificador.setText("Identificador");
-
-        tvOperadorRelacional.setText("Operador relacional");
-
-        tvOperadorLogico.setText("Operador logico");
-
-        tvAsignacion.setText("Asignacion");
-
-        tvNumEnteros.setText("Numeros enteros");
-
-        tvNumDecimales.setText("Numeros decimales");
-
-        tvComentarios.setText("Comentario");
-
-        tvParentesis.setText("Parentesis");
-
-        tvLlave.setText("Llave");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +139,6 @@ public class Form extends JFrame {
             while ((linea = br.readLine()) != null) texto.append(linea).append("\n");
 
             //Declaracion de StringTokenizer y ArrayList
-
             List<String> tokensList = new ArrayList<>();
             StringTokenizer tokenizer = new StringTokenizer(texto.toString());
             while (tokenizer.hasMoreElements()) {
@@ -170,9 +149,14 @@ public class Form extends JFrame {
             for (String s : tokensList) {
                 //System.out.println("Char " + i + " is " + s.charAt(i));
 
-                //automata operador aritemtico, evaluando +, * y %
+                //Automata, operador aritemtico, evaluando: +, * y %
                 if (tokens.arithmeticOperator(s)) arithmeticOperatorToken++;
 
+                //Automata, asignacion, evaluando: =
+                if (tokens.assignmentOperator(s)) assignmentToken++;
+
+                //Automata, operadores logicos, evaluando &&, ||, !
+                if (tokens.logicOperator(s)) logicOperatorToken++;
 
                 //evaluar "-", numeros decimales y enteros
                     /*if (s.charAt(i) == '-') {
@@ -209,6 +193,8 @@ public class Form extends JFrame {
             System.out.println("Texto: " + tokensList.get(0));
             System.out.println("Texto: " + tokensList.get(1));*/
             tvOperadorAritmetico.setText("Operadores aritmeticos encontrados: " + arithmeticOperatorToken);
+            tvAsignacion.setText("Operadores de asignacion encontrados: " + assignmentToken);
+            tvOperadorLogico.setText("Operadores logicos encontrados: " + logicOperatorToken);
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
