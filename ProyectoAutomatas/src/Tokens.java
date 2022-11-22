@@ -17,9 +17,27 @@ public class Tokens {
     * parentesis: termiando
     * llave: terminado*/
 
-    Boolean comment() {
+    boolean comment(String word) {
         boolean isValid = false;
-
+        char [] cadena = word.toCharArray();
+        int index = 0;
+        int size = word.length()-1;
+        if (cadena[index] == '/' && index < size) {
+            index++;
+            if (cadena[index] == '*' && index < size) {
+                index++;
+                while (index < size) {
+                    if (cadena[index] == '*') {
+                        index++;
+                        if (cadena[index] == '/' && index == size) {
+                            isValid = true;
+                        }
+                    } else {
+                        index++;
+                    }
+                }
+            }
+        }
         return isValid;
     }
     Boolean wholeNumber(String word) {

@@ -173,6 +173,9 @@ public class Form extends JFrame {
                 //Automata, numeros decimales
                 if (tokens.numberDecimalValidation(s)) decimalNumberToken++;
 
+                //Automata, comentario con formato: /* */
+                if (tokens.comment(s)) commentToken++;
+
                 //evaluar "-", numeros decimales y enteros
                     /*if (s.charAt(i) == '-') {
 
@@ -215,6 +218,7 @@ public class Form extends JFrame {
             tvParentesis.setText("Parentesis encontrados: " + parenthesisToken);
             tvNumEnteros.setText("Numeros enteros econtrados: " + wholeNumberToken);
             tvNumDecimales.setText("Numeros decimales econtrados: " + decimalNumberToken);
+            tvComentarios.setText("Comentarios encontrados: " + commentToken);
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
