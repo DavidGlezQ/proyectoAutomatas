@@ -12,8 +12,8 @@ public class Tokens {
     * operador logico: terminado
     * asignacion: terminado
     * numeros enteros: terminado
-    * numero decimal
-    * comentario
+    * numero decimal: terminado (validar numero negativo)
+    * comentario: terminado
     * parentesis: termiando
     * llave: terminado*/
 
@@ -76,19 +76,27 @@ public class Tokens {
          * validar que sea un numero
          * despues del signo negativo validar sacando el residuo para saber si es o no entero
          * */
-        try {
-            return isDecimalNumber(word);
+        /*try {
+            //return isDecimalNumber(word);
+            //return (Double.parseDouble(word) % 1 >= 1);
+            //return true;
         } catch (NumberFormatException nfe){
             return false;
+        }*/
+        try {
+            double d = Double.parseDouble(word);
+        } catch (NumberFormatException nfe) {
+            return false;
         }
+        return true;
     }
 
     Boolean isDecimalNumber(String word) {
-        Character c;
         boolean isValid = false;
+        Character c;
         int control = 0;
         for (int i = 0; i < word.length(); i++) {
-            c = word.charAt(i);
+            c = word.charAt(i++);
             if (!Character.isDigit(c)) {
                 if (c.equals('.') && control == 0) {
                     control ++;
