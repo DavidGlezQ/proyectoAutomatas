@@ -6,16 +6,22 @@
 public class Tokens {
 
     /*Lista de tokens:
-    * idetificador: terminado
+    * idetificador:
     * operador relacional: terminado
     * operador aritmetico: terminado
     * operador logico: terminado
     * asignacion: terminado
-    * numeros enteros: terminado
-    * numero decimal: terminado (validar numero negativo)
+    * numeros enteros:
+    * numero decimal:
     * comentario: terminado
     * parentesis: termiando
     * llave: terminado*/
+
+    Boolean identifier(String word) {
+        boolean isValid = false;
+
+        return isValid;
+    }
 
     boolean comment(String word) {
         boolean isValid = false;
@@ -64,6 +70,7 @@ public class Tokens {
     }
 
     Boolean numberWholeValidation(String word) {
+        //Validar solo si tiene o no punto decimal
         try {
             return (Integer.parseInt(word) % 2 == 0);
         } catch (NumberFormatException nfe){
@@ -83,6 +90,7 @@ public class Tokens {
         } catch (NumberFormatException nfe){
             return false;
         }*/
+        //validar solo si tiene punto
         try {
             double d = Double.parseDouble(word);
         } catch (NumberFormatException nfe) {
@@ -116,11 +124,13 @@ public class Tokens {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == '+' || word.charAt(i) == '*' || word.charAt(i) == '%'
                     || word.charAt(i) == '-' || word.charAt(i) == '/') {
-                if (word.length() > 2){
+                if (word.length() >= 2){
                     System.out.println("la palabra empieza con un operdor pero tiene un caracter despues");
                     return false;
                 } else {
                     System.out.println("Es un operador aritmetico");
+                    System.out.println("Es un operador aritmetico");
+                    System.out.println(word);
                     isValid = true;
                 }
             }
@@ -188,7 +198,7 @@ public class Tokens {
         boolean isValid = false;
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == '=') {
-                if (word.length() > 2){
+                if (word.length() >= 2){
                     System.out.println("la palabra empieza con un operdor de asignacion pero tiene un caracter despues");
                     return false;
                 } else {

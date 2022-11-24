@@ -127,6 +127,7 @@ public class Form extends JFrame {
         int commentToken = 0;
         int parenthesisToken = 0;
         int bracketsToken = 0;
+        int errorToken = 0;
 
 
 
@@ -148,6 +149,10 @@ public class Form extends JFrame {
             // StrCharAt.java
             for (String s : tokensList) {
                 //System.out.println("Char " + i + " is " + s.charAt(i));
+
+                //Automata, idetificar
+                if (tokens.identifier(s)) identifierToken++;
+                else errorToken++;
 
                 //Automata, operador aritemtico, evaluando: +, * y %
                 if (tokens.arithmeticOperator(s)) arithmeticOperatorToken++;
@@ -210,6 +215,7 @@ public class Form extends JFrame {
             /*System.out.println("Tamaño del texto: " + tokensList.size());
             System.out.println("Texto: " + tokensList.get(0));
             System.out.println("Texto: " + tokensList.get(1));*/
+            tvIdentificador.setText("Operadores de asignacion:" + errorToken);
             tvOperadorAritmetico.setText("Operadores aritmeticos encontrados: " + arithmeticOperatorToken);
             tvAsignacion.setText("Operadores de asignacion encontrados: " + assignmentToken);
             tvOperadorLogico.setText("Operadores logicos encontrados: " + logicOperatorToken);
