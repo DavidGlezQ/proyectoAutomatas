@@ -91,6 +91,7 @@ public class Tokens {
         return true;
     }
 
+    //Gis si funka
     Boolean isDecimalNumber(String word) {
         boolean isValid = false;
         Character c;
